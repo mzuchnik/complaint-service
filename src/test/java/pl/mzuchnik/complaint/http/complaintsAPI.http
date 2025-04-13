@@ -1,0 +1,29 @@
+POST http://localhost:8080/complaints
+Content-Type: application/json
+Accept: application/json
+
+{
+  "productUuid": "45b220e4-c78f-4c9d-8ecf-5bd65b2c168f",
+  "reporterEmail": "test@test.com",
+  "content": "Treść zgłoszenia 123"
+}
+
+###
+
+GET http://localhost:8080/complaints
+Accept: application/json
+
+###
+
+GET http://localhost:8080/complaints/37290287-717c-443d-ae5b-1567a1a1add8
+Accept: application/json
+
+###
+
+PATCH http://localhost:8080/complaints/37290287-717c-443d-ae5b-1567a1a1add8
+Content-Type: application/json
+Accept: application/json
+
+{
+  "content": "nowa treść..."
+}

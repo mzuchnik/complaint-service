@@ -19,7 +19,7 @@ Reklamacja powinna zawierać takie informacje jak:
 - kraj
 - licznik zgłoszeń
 
-w polu kraj powinien być wpisany kraj z którego klient dodał reklamację.
+w polu kraj powinien być wpisany kraj, z którego klient dodał reklamację.
 Kraj jest wyznaczany na podstawie IP klienta.
 
 Unikalność reklamacji zapewnia para "identyfikator produktu" i "zgłaszający". 
@@ -43,8 +43,8 @@ Oprócz samej komunikacji trzeba dodatkowo doprecyzować.
 - Treść reklamacji - prawdopodobnie String, czy chcemy tutaj jakieś ograniczenia np: długość znaków zgłoszenia? 
 - Data stworzenia - Data z offsetem kiedy otrzymamy request od zgłaszającego reklamacje
 - zgłaszający - jak rozumieć zgłaszającego? Czy jest to identyfikator konta? może adres email, może UUID?
-- Kraj - kraj wyznaczany na podstawie IP klienta, tutaj będzie potrzebna usługa do wyznaczania kraju po IP.
-- licznik zgłoszeń - pole które będzie "zwiększane o 1" za każdym razem kiedy otrzymamy duplikat
+- Kraj - kraj wyznaczany na podstawie IP klienta, tutaj będzie potrzebna usługa do wyznaczania kraju po IP (a co jeśli usługa będzie w tym czasie niedostępna, albo zwróci błąd?).
+- licznik zgłoszeń - pole które będzie "zwiększane o 1" za każdym razem, kiedy otrzymamy duplikat
 - Czym jest duplikat: duplikat to identyczna para (identyfikator produktu + zgłaszający)
 
 ### Wstępne ustalenia
@@ -55,9 +55,11 @@ __Na potrzeby zadania:__
 - Treść reklamacji: String z ograniczeniem długości do 1000 znaków (włącznie ze znakami białymi)
 - Data stworzenia: Jest to data otrzymania żądania od użytkownika z offsetem.
 - Zgłaszający: poprawny adres email (String)
-- Kraj: kraj wyznaczony z usługi do geolokalizacji IP. (String)
+- Kraj: kraj wyznaczony z usługi do geolokalizacji IP. (String) (Jeśli błąd usługi to ustawiam UNKNOWN)
 - Licznik zgłoszeń: liczba całkowita, zakładam, że nie przekroczy ona zakresu int'a ;)
 - Aplikacja obsługuje tylko żądania JSON
+- W przypadku jakiegoś błędu z żądaniem jest zwracany odpowiedni komunikat.
+- Zachowane zostaną odpowiednie status HTTP.
 
 __Stos technologiczny__
 - Java 21

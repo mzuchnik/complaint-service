@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: complaint-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
