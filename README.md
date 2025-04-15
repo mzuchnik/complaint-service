@@ -97,7 +97,7 @@ Aplikacja uruchamia się na porcie 8080.
 
 Dostępne endpointy i przykłady użycia:
 
-Dodatkowo można skorzystać z 
+Dodatkowo można skorzystać z dokumentacji po uruchomieniu aplikacji w postaci Swagger'a: http://localhost:8080/swagger-ui/index.html
 
 __Dodawanie reklamacji__
 ```
