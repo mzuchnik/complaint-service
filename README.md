@@ -91,5 +91,48 @@ Należy wydać polecenie w głównym katalogu projeku ``./gradlew bootRun -DPOST
 - ``POSTGRES_USERNAME`` - nazwa użytkownika
 - ``POSTGRES_PASSWORD`` - hasło do bazy
 
+## Instrukcja
 
+Aplikacja uruchamia się na porcie 8080.
+
+Dostępne endpointy i przykłady użycia:
+
+Dodatkowo można skorzystać z 
+
+__Dodawanie reklamacji__
+```
+POST http://localhost:8080/complaints
+Content-Type: application/json
+Accept: application/json
+
+{
+"productUuid": "45b220e4-c78f-4c9d-8ecf-5bd65b2c168f",
+"reporterEmail": "test@test.com",
+"content": "Treść zgłoszenia 123"
+}
+```
+
+__Pobieranie wszystkich reklamacji__
+```
+GET http://localhost:8080/complaints
+Accept: application/json
+
+```
+
+__Pobieranie konkretnej reklamacji__
+```
+GET http://localhost:8080/complaints/1d161ae9-b41a-46dc-bfae-856286d0feea
+Accept: application/json
+```
+
+__Aktualizacja opisu reklamacji__
+```
+PATCH http://localhost:8080/complaints/1d161ae9-b41a-46dc-bfae-856286d0feea
+Content-Type: application/json
+Accept: application/json
+
+{
+"content": "nowa treść..."
+}
+```
 
