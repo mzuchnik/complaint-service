@@ -16,7 +16,7 @@ public class GetComplaintByIdUseCase {
     private final ComplaintRepository complaintRepository;
 
     public Optional<Complaint> getByComplaintId(UUID complaintId) {
-
+        // Some extra validation for authorities
         return complaintRepository.findById(new ComplaintId(complaintId));
     };
 }

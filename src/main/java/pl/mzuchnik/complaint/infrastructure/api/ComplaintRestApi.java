@@ -1,4 +1,4 @@
-package pl.mzuchnik.complaint.infrastructure.restapi;
+package pl.mzuchnik.complaint.infrastructure.api;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -10,10 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import pl.mzuchnik.complaint.application.dto.AddComplaintDTO;
-import pl.mzuchnik.complaint.application.usecase.AddComplaintUseCase;
 import pl.mzuchnik.complaint.application.usecase.EditComplaintContentUseCase;
 import pl.mzuchnik.complaint.application.usecase.GetAllComplaintsUseCase;
 import pl.mzuchnik.complaint.application.usecase.GetComplaintByIdUseCase;
+import pl.mzuchnik.complaint.application.usecase.SubmitComplaintUseCase;
 import pl.mzuchnik.complaint.domain.exception.NotFoundComplaintException;
 import pl.mzuchnik.complaint.domain.model.Complaint;
 import pl.mzuchnik.complaint.domain.model.ComplaintId;
@@ -28,21 +28,21 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 class ComplaintRestApi {
 
-    private final AddComplaintUseCase addComplaintUseCase;
+    private final SubmitComplaintUseCase submitComplaintUseCase;
     private final GetAllComplaintsUseCase getAllComplaintsUseCase;
     private final GetComplaintByIdUseCase getComplaintByIdUseCase;
     private final EditComplaintContentUseCase editComplaintContentUseCase;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> addComplaint(@Valid @RequestBody AddComplaintRequest body,
+    ResponseEntity<Void> addComplaint(@Valid @RequestBody SubmitComplaintHttpRequest bodyRequest,
                                       HttpServletRequest request,
                                       UriComponentsBuilder uriComponentsBuilder) {
 
-        ComplaintId complaintId = addComplaintUseCase.addComplaint(
+        ComplaintId complaintId = submitComplaintUseCase.submitComplaint(
                 new AddComplaintDTO(
-                        body.productUuid,
-                        body.reporterEmail,
-                        body.content,
+                        bodyRequest.productUuid,
+                        bodyRequest.reporterEmail,
+                        bodyRequest.content,
                         request.getRemoteAddr()));
 
         return ResponseEntity.created(uriComponentsBuilder.path("/complaints/{complaintId}").build(complaintId.uuid())).build();
@@ -85,9 +85,9 @@ class ComplaintRestApi {
                 complaint.getCounter().counter());
     }
 
-    record AddComplaintRequest(@NotNull(message = "'productUuid' cannot be null") UUID productUuid,
-                               @NotBlank(message = "'reporterEmail' cannot be blank") String reporterEmail,
-                               String content) {
+    record SubmitComplaintHttpRequest(@NotNull(message = "'productUuid' cannot be null") UUID productUuid,
+                                      @NotBlank(message = "'reporterEmail' cannot be blank") String reporterEmail,
+                                      String content) {
     }
 
     record ComplaintResponse(UUID complaintId, UUID productUuid, String reporterEmail, String content, String country,

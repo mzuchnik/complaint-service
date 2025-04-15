@@ -64,9 +64,13 @@ __Na potrzeby zadania:__
 __Stos technologiczny__
 - Java 21
 - Spring Boot
+- Hibernate
 - Gradle
 - PostgresSQL
 - Docker / Docker Compose
+
+Dodatkowo zakładam, że api będzie używane na użytek wewnętrzny tzn nie jest to API publiczne stąd,
+zastosuję tutaj drugi poziom ("HTTP Verbs") dojrzałości REST.
 
 
 

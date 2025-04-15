@@ -14,6 +14,7 @@ public class GetAllComplaintsUseCase {
     private final ComplaintRepository complaintRepository;
 
     public List<Complaint> getAllComplaints(){
+        // Some extra validation for authorities
         return complaintRepository.findAll();
     }
 }

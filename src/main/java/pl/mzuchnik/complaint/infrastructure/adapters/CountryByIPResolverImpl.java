@@ -14,7 +14,7 @@ import java.util.Optional;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-class ExternalCountryByIPResolver implements CountryByIPResolver {
+class CountryByIPResolverImpl implements CountryByIPResolver {
 
     private final RestClient.Builder restClientBuilder;
     private static final String URL_TEMPLATE = "http://ip-api.com/json/%s?fields=status,country";
