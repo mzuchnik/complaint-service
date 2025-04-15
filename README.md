@@ -72,7 +72,24 @@ __Stos technologiczny__
 Dodatkowo zakładam, że api będzie używane na użytek wewnętrzny tzn nie jest to API publiczne stąd,
 zastosuję tutaj drugi poziom ("HTTP Verbs") dojrzałości REST.
 
+## Uruchomienie aplikacji
+Poniżej znajdują się sposóby na uruchomienie aplikacji.
 
+### Docker
+Aby uruchomić aplikację, wystarczy pobrać to repozytorium lokalnie oraz wydać polecenie z głównego katalogu projektu:
+
+``docker compose up``
+
+Za pierwszym razem serwis będzie potrzebował obrazu lokalnego więc pierwszym krokiem będzie zbudowanie go za pomocą dostarczonego pliku ``Dockerfile``.
+Następnie uruchomi się dalsza część aplikacji.
+
+### Gradle Wrapper
+
+Należy postawić i udostępnić pod portem 5432 serwer bazodanowy Postgres. Baza danych to domyślna postgres.
+
+Należy wydać polecenie w głównym katalogu projeku ``./gradlew bootRun -DPOSTGRES_USERNAME=... -D POSTGRES_PASSWORD=...``, dodatkowo zmiennymi środowiskowymi trzeba wskazać użytkownika i hasło:
+- ``POSTGRES_USERNAME`` - nazwa użytkownika
+- ``POSTGRES_PASSWORD`` - hasło do bazy
 
 
 
