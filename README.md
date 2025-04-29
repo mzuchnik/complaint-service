@@ -1,4 +1,4 @@
-# Zadanie rekrutacyjne
+# Zadanie
 
 
 ## Treść zadania
